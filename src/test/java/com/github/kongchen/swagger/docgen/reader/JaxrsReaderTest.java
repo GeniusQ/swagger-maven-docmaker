@@ -5,8 +5,12 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.kongchen.swagger.docgen.spring.SpringResource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.jaxrs.ext.SwaggerExtension;
 import io.swagger.jaxrs.ext.SwaggerExtensions;
 import io.swagger.models.Swagger;
@@ -20,10 +24,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 public class JaxrsReaderTest {
@@ -76,6 +82,17 @@ public class JaxrsReaderTest {
         assertSwaggerResponseContents(expectedTag, result);
     }
 
+    @Test void discoverService() throws JsonProcessingException {
+        Swagger result1 = reader.read(AnService.class);
+        result1 = reader.read(AnApi.class);
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(result1);
+        System.out.println("================ Swagger2 Json ================");
+        System.out.println(json);
+        System.out.println("================ Swagger2 Json End ================");
+        assertNotNull(result1, "No Swagger object created");
+    }
+
     @Test
     public void createNewSwaggerInstanceIfNoneProvided() {
         JaxrsReader nullReader = new JaxrsReader(null, log);
@@ -107,7 +124,8 @@ public class JaxrsReaderTest {
     static class AnApi {
         @ApiOperation(value = "Get a model.")
         @GET
-        public Response getOperation() {
+        @Path("getOperation")
+        public Response getOperation(int xxx) {
             return Response.ok().build();
         }
     }
@@ -124,5 +142,24 @@ public class JaxrsReaderTest {
 
     @Path("/apath")
     static class NotAnnotatedApi {
+    }
+
+    @Api("theService")
+    static class AnService
+    {
+        @ApiOperation(value="static now", notes="get current time")
+        public static Date now()
+        {
+            return new Date();
+        }
+
+        @ApiOperation(value="add", notes="x+y=?",response = Swagger.class)
+        public int add(@ApiParam(name = "x",value="this is x") int x,
+                       @ApiParam(name = "参数名称", value = "这是说明") int y
+                       ,@ApiParam(name = "SpringResource") SpringResource ss
+                       )
+        {
+            return x+y;
+        }
     }
 }

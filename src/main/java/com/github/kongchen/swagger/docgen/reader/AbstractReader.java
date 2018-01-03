@@ -391,11 +391,11 @@ public abstract class AbstractReader {
         Iterator<SwaggerExtension> chain = SwaggerExtensions.chain();
         List<Parameter> parameters = new ArrayList<Parameter>();
         Class<?> cls = TypeUtils.getRawType(type, type);
-        LOG.debug("Looking for path/query/header/form/cookie params in " + cls);
+        if(LOG!=null) LOG.debug("Looking for path/query/header/form/cookie params in " + cls);
 
         if (chain.hasNext()) {
             SwaggerExtension extension = chain.next();
-            LOG.debug("trying extension " + extension);
+            if(LOG!=null) LOG.debug("trying extension " + extension);
             parameters = extension.extractParameters(annotations, type, typesToSkip, chain);
         }
 
@@ -404,7 +404,7 @@ public abstract class AbstractReader {
                 ParameterProcessor.applyAnnotations(swagger, parameter, type, annotations);
             }
         } else {
-            LOG.debug("Looking for body params in " + cls);
+            if(LOG!=null) LOG.debug("Looking for body params in " + cls);
             if (!typesToSkip.contains(type)) {
                 Parameter param = ParameterProcessor.applyAnnotations(swagger, null, type, annotations);
                 if (param != null) {

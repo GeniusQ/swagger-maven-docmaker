@@ -93,7 +93,9 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
         if (swagger == null) {
             swagger = new Swagger();
         }
+        //获取api注解
         Api api = AnnotationUtils.findAnnotation(cls, Api.class);
+        //获取Path
         Path apiPath = AnnotationUtils.findAnnotation(cls, Path.class);
 
         // only read if allowing hidden apis OR api is not marked as hidden
@@ -114,17 +116,28 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
         // parse the method
         for (Method method : cls.getMethods()) {
             ApiOperation apiOperation = AnnotationUtils.findAnnotation(method, ApiOperation.class);
+            if (apiOperation == null)
+                continue;
+
             if (apiOperation != null && apiOperation.hidden()) {
                 continue;
             }
             Path methodPath = AnnotationUtils.findAnnotation(method, Path.class);
 
             String operationPath = getPath(apiPath, methodPath, parentPath);
+            if(operationPath == null)
+            {
+                String[] tokens = cls.getName().split("\\$");
+                operationPath = tokens[1]+"."+method.getName(); //+" ("+tokens[0]+")"
+            }
             if (operationPath != null) {
                 Map<String, String> regexMap = new HashMap<String, String>();
                 operationPath = parseOperationPath(operationPath, regexMap);
 
                 String httpMethod = extractOperationMethod(apiOperation, method, SwaggerExtensions.chain());
+
+                if(httpMethod==null)
+                    httpMethod = "post";
 
                 Operation operation = parseMethod(httpMethod, method);
                 updateOperationParameters(parentParameters, regexMap, operation);
