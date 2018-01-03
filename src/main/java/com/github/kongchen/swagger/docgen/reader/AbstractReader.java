@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.HeaderParam;
@@ -236,7 +237,7 @@ public abstract class AbstractReader {
         return (api == null) || (readHidden) || (!api.hidden());
     }
 
-    protected Set<Tag> extractTags(Api api) {
+    protected Set<Tag> extractTags(Api api,@Nullable String className) {
         Set<Tag> output = new LinkedHashSet<Tag>();
         if(api == null) {
             return output;
@@ -253,7 +254,7 @@ public abstract class AbstractReader {
             // derive tag from api path + description
             String tagString = api.value().replace("/", "");
             if (!tagString.isEmpty()) {
-                Tag tag = new Tag().name(tagString);
+                Tag tag = new Tag().name(tagString+(className==null?"":"　"+className));
                 if (!api.description().isEmpty()) {
                     tag.description(api.description());
                 }
@@ -276,10 +277,10 @@ public abstract class AbstractReader {
         }
     }
 
-    protected Map<String, Tag> updateTagsForApi(Map<String, Tag> parentTags, Api api) {
+    protected Map<String, Tag> updateTagsForApi(Map<String, Tag> parentTags, Api api, @Nullable String className) {
         // the value will be used as a tag for 2.0 UNLESS a Tags annotation is present
         Map<String, Tag> tagsMap = new HashMap<String, Tag>();
-        for (Tag tag : extractTags(api)) {
+        for (Tag tag : extractTags(api,className)) {
             tagsMap.put(tag.getName(), tag);
         }
         if (parentTags != null) {

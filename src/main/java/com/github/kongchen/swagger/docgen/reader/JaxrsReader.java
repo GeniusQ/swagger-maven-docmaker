@@ -103,7 +103,7 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
             return swagger;
         }
 
-        Map<String, Tag> tags = updateTagsForApi(parentTags, api);
+        Map<String, Tag> tags = updateTagsForApi(parentTags, api, cls.getName());
         List<SecurityRequirement> securities = getSecurityRequirements(api);
         Map<String, Tag> discoveredTags = scanClasspathForTags();
 
@@ -127,8 +127,7 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
             String operationPath = getPath(apiPath, methodPath, parentPath);
             if(operationPath == null)
             {
-                String[] tokens = cls.getName().split("\\$");
-                operationPath = tokens[1]+"."+method.getName(); //+" ("+tokens[0]+")"
+                operationPath = cls.getSimpleName()+"."+method.getName(); //+" ("+tokens[0]+")"
             }
             if (operationPath != null) {
                 Map<String, String> regexMap = new HashMap<String, String>();
@@ -137,7 +136,7 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
                 String httpMethod = extractOperationMethod(apiOperation, method, SwaggerExtensions.chain());
 
                 if(httpMethod==null)
-                    httpMethod = "post";
+                    httpMethod = "patch";
 
                 Operation operation = parseMethod(httpMethod, method);
                 updateOperationParameters(parentParameters, regexMap, operation);

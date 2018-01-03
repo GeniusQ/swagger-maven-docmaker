@@ -51,7 +51,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
     public SpringMvcApiReader(Swagger swagger, Log log) {
         super(swagger, log);
     }
-    
+
     @Override
     protected void updateExtensionChain() {
     	List<SwaggerExtension> extensions = new ArrayList<SwaggerExtension>();
@@ -98,7 +98,7 @@ public class SpringMvcApiReader extends AbstractReader implements ClassSwaggerRe
             if (!canReadApi(false, api)) {
                 return swagger;
             }
-            tags = updateTagsForApi(null, api);
+            tags = updateTagsForApi(null, api,null);
             resourceSecurities = getSecurityRequirements(api);
         }
 
