@@ -7,15 +7,15 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.kongchen</groupId>
-    <artifactId>swagger-maven-plugin</artifactId>
-    <version>3.1.7-SNAPSHOT</version>
+    <groupId>com.github.geniusq</groupId>
+    <artifactId>swagger-maven-docmaker</artifactId>
+    <version>1.0.0</version>
     <packaging>maven-plugin</packaging>
-    <name>Swagger Maven Plugin</name>
+    <name>Swagger Maven Docmaker Plugin</name>
     <description>
-        A maven build plugin which helps you generate API document during build phase
+        A maven build plugin which helps you generate Java document during build phase
     </description>
-    <url>https://github.com/kongchen/swagger-maven-plugin</url>
+    <url>https://github.com/geniusq/swagger-maven-docmaker</url>
     <licenses>
         <license>
             <name>Apache license</name>
@@ -23,27 +23,12 @@
         </license>
     </licenses>
 
-    <scm>
-        <connection>scm:git:git@github.com:kongchen/swagger-maven-plugin.git</connection>
-        <url>scm:git:git@github.com:kongchen/swagger-maven-plugin.git</url>
-        <developerConnection>scm:git:git@github.com:kongchen/swagger-maven-plugin.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
 
     <developers>
         <developer>
-            <id>kongchen</id>
-            <name>Kong Chen</name>
+            <id>GeniusQ</id>
+            <name>GeniusQ</name>
             <timezone>+8</timezone>
-        </developer>
-        <developer>
-            <id>tedleman</id>
-            <name>Troy Edleman</name>
-            <timezone>-5</timezone>
-        </developer>
-        <developer>
-            <id>who</id>
-            <name>Andrew B</name>
         </developer>
     </developers>
 
@@ -120,6 +105,14 @@
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.4</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
