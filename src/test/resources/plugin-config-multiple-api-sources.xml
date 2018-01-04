@@ -2,9 +2,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.github.kongchen</groupId>
-                <artifactId>swagger-maven-plugin</artifactId>
-                <version>3.0-M2-SNAPSHOT</version>
+                <groupId>com.github.geniusq</groupId>
+                <artifactId>swagger-maven-docmaker</artifactId>
+                <version>1.0.0</version>
                 <configuration>
                     <apiSources>
                         <apiSource>
