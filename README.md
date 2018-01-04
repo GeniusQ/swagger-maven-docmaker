@@ -16,7 +16,7 @@ Swagger Maven Docmaker用于java开发文档自动生成，它将提取您项目
 - [1.0.0](https://github.com/geniusq/swagger-maven-docmaker/) 支持非Resful Api类的文档生成 (**ACTIVE!**)
 - [3.1.0](https://github.com/kongchen/swagger-maven-plugin/) supports Swagger Spec [2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md), support JAX-RS & SpingMVC. (**ACTIVE!**)
 
-# 配置说明
+# 使用说明
 
 * 使用swagger注解来编写java代码的注释，如下
 
