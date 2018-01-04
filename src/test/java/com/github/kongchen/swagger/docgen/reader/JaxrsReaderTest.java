@@ -114,9 +114,10 @@ public class JaxrsReaderTest {
         assertFalse(result.getTags().isEmpty(), "Should contain api tags");
         assertTrue(result.getTags().contains(expectedTag), "Expected tag missing");
         assertFalse(result.getPaths().isEmpty(), "Should contain operation paths");
-        assertTrue(result.getPaths().containsKey("/apath"), "Path missing from paths map");
-        io.swagger.models.Path path = result.getPaths().get("/apath");
-        assertFalse(path.getOperations().isEmpty(), "Should be a get operation");
+        String path = "/apath/getOperation";
+        assertTrue(result.getPaths().containsKey(path), "Path missing from paths map");
+        io.swagger.models.Path r = result.getPaths().get(path);
+        assertFalse(r.getOperations().isEmpty(), "Should be a get operation");
     }
 
     @Api(tags = "atag")
