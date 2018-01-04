@@ -23,6 +23,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import io.swagger.models.parameters.QueryParameter;
 import org.apache.maven.plugin.logging.Log;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
@@ -403,8 +404,22 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
             List<Annotation> annotations = Arrays.asList(paramAnnotations[i]);
             List<Parameter> parameters = getParameters(type, annotations);
 
-            for (Parameter parameter : parameters) {
-                operation.parameter(parameter);
+            if(parameters.size()==0)
+            {
+                Parameter p = new QueryParameter();
+                p.setName(getTypeName(type)+"_"+i);
+                p.setDescription("没写注释");
+                operation.parameter(p);
+            }
+            else
+            {
+                for (Parameter parameter : parameters) {
+                    if(parameter.getName().equalsIgnoreCase("body"))
+                    {
+                        parameter.setName(getTypeName(type)+"_"+i);
+                    }
+                    operation.parameter(parameter);
+                }
             }
         }
         if (operation.getResponses() == null) {
@@ -417,6 +432,15 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
         processOperationDecorator(operation, method);
 
         return operation;
+    }
+
+    private String getTypeName(Type type)
+    {
+        String[] names =type.getTypeName().split(".");
+        String name = type.getTypeName();
+        if(names.length>0)
+            name = names[names.length-1];
+        return name;
     }
 
 	private Class<?> convertToClass(Type type) {
