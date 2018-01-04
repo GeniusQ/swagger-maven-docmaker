@@ -96,6 +96,6 @@ public class Log
 </plugin>
 ```
 
-# 打开maven project面板，plugins->swaggerdocmaker，双击generate生成json和md文件
+* 打开maven project面板，plugins->swaggerdocmaker，双击generate生成json和md文件
 
 # 暂时没有了
