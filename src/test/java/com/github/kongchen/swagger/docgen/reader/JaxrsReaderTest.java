@@ -30,6 +30,7 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 public class JaxrsReaderTest {
@@ -155,9 +156,11 @@ public class JaxrsReaderTest {
         }
 
         @ApiOperation(value="add", notes="x+y=?",response = Swagger.class)
-        public int add(@ApiParam(name = "x",value="this is x") int x,
+        public int add(MultivaluedMap<String,String> kv,    //这个是不显示的
+                       @ApiParam(name = "x",value="this is x") int x,
                        @ApiParam(name = "参数名称", value = "这是说明") int y
                        ,@ApiParam(name = "SpringResource") SpringResource ss
+
                        )
         {
             return x+y;

@@ -13,8 +13,9 @@ Swagger Maven Docmaker用于java开发文档自动生成，它将提取您项目
 * Use [Handlebars](http://handlebarsjs.com/) as template to customize the static document.
 
 # 版本日志
-- [1.0.0](https://github.com/geniusq/swagger-maven-docmaker/) 支持非Resful Api类的文档生成 (**ACTIVE!**)
-- [3.1.0](https://github.com/kongchen/swagger-maven-plugin/) supports Swagger Spec [2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md), support JAX-RS & SpingMVC. (**ACTIVE!**)
+- [1.0.1](https://github.com/geniusq/swagger-maven-docmaker/) 不生成类型为MultivaluedMap和HttpServletRequest的参数 (**ACTIVE!**)
+- [1.0.0](https://github.com/geniusq/swagger-maven-docmaker/) 支持非Resful Api类的文档生成 
+- [3.1.0](https://github.com/kongchen/swagger-maven-plugin/) supports Swagger Spec [2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md), support JAX-RS & SpingMVC. 
 
 # 使用说明
 

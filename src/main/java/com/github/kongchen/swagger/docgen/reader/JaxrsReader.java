@@ -406,10 +406,18 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
 
             if(parameters.size()==0)
             {
-                Parameter p = new QueryParameter();
-                p.setName(getTypeName(type)+"_"+i);
-                p.setDescription("没写注释");
-                operation.parameter(p);
+                if(getTypeName(type).contains("javax.ws.rs.core.MultivaluedMap")
+                        || getTypeName(type).contains("HttpServletRequest"))
+                {
+                    //过滤掉map和request
+                }
+                else
+                {
+                    Parameter p = new QueryParameter();
+                    p.setName(getTypeName(type)+"_"+i);
+                    p.setDescription("没写注释");
+                    operation.parameter(p);
+                }
             }
             else
             {

@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.geniusq</groupId>
     <artifactId>swagger-maven-docmaker</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>maven-plugin</packaging>
     <name>Swagger Maven Docmaker Plugin</name>
     <description>
@@ -271,13 +271,13 @@
                 <configuration>
                     <signature>
                         <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16-sun</artifactId>
+                        <artifactId>java18</artifactId>
                         <version>1.0</version>
                     </signature>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>check-java16-sun</id>
+                        <id>check-java18</id>
                         <phase>test</phase>
                         <goals>
                             <goal>check</goal>
