@@ -104,7 +104,7 @@ public class JaxrsReader extends AbstractReader implements ClassSwaggerReader {
             return swagger;
         }
 
-        Map<String, Tag> tags = updateTagsForApi(parentTags, api, cls.getName());
+        Map<String, Tag> tags = updateTagsForApi(parentTags, api, cls.getSimpleName());
         List<SecurityRequirement> securities = getSecurityRequirements(api);
         Map<String, Tag> discoveredTags = scanClasspathForTags();
 
