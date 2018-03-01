@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.geniusq</groupId>
     <artifactId>swagger-maven-docmaker</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>maven-plugin</packaging>
     <name>Swagger Maven Docmaker Plugin</name>
     <description>
